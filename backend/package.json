@@ -1,0 +1,41 @@
+{
+  "name": "ibt-aqua-backend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/server.js",
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "node --watch src/server.js",
+    "migrate": "knex --knexfile src/config/knexfile.js migrate:latest",
+    "rollback": "knex --knexfile src/config/knexfile.js migrate:rollback",
+    "seed": "node src/database/seed.js",
+    "db:reset": "rm -f data/ibt_aqua.sqlite* && node src/database/seed.js",
+    "backup": "node src/utils/backup.js",
+    "test": "node --test --test-concurrency=1 tests/*.test.js",
+    "seed:prod": "node src/database/seed.js --base-only"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bcryptjs": "^3.0.3",
+    "better-sqlite3": "^13.0.3",
+    "cors": "^2.8.6",
+    "dotenv": "^18.0.9",
+    "exceljs": "^4.4.0",
+    "express": "^5.3.0",
+    "express-rate-limit": "^8.7.3",
+    "helmet": "^8.3.0",
+    "jsonwebtoken": "^9.0.3",
+    "knex": "^3.3.0",
+    "morgan": "^1.12.1",
+    "multer": "^2.5.0",
+    "pdfkit": "^0.20.2",
+    "razorpay": "^2.9.8",
+    "zod": "^4.6.7"
+  },
+  "devDependencies": {
+    "supertest": "^7.3.2"
+  },
+  "type": "commonjs"
+}

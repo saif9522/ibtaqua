@@ -1,0 +1,73 @@
+@import "tailwindcss";
+
+@theme {
+  --color-paper: #ffffff;
+  --color-mist: #eef7fa;
+  --color-mist-2: #dcEff5;
+  --color-shoal: #cfe6ee;
+  --color-aqua: #0596b4;
+  --color-aqua-600: #04819b;
+  --color-aqua-700: #046b81;
+  --color-depth: #0a4a63;
+  --color-ink: #16323f;
+  --color-ink-soft: #4b6572;
+  --color-marigold: #e9a93a;
+  --color-marigold-soft: #fdf3df;
+  --color-ok: #138a5b;
+  --color-ok-soft: #e3f5ec;
+  --color-danger: #c23a3a;
+  --color-danger-soft: #fbe9e9;
+
+  --font-display: "Bricolage Grotesque", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: "Instrument Sans", ui-sans-serif, system-ui, sans-serif;
+
+  --radius-ctl: 10px;
+  --radius-panel: 18px;
+}
+
+@layer base {
+  html { -webkit-text-size-adjust: 100%; }
+  body { @apply bg-paper font-sans text-ink antialiased; font-size: 15px; line-height: 1.55; }
+  h1, h2, h3, h4 { @apply font-display text-depth; letter-spacing: -0.015em; line-height: 1.12; }
+  :focus-visible { outline: 2.5px solid var(--color-aqua); outline-offset: 2px; border-radius: 6px; }
+  ::selection { background: #bfe8f2; }
+  input, select, textarea, button { font: inherit; }
+}
+
+@utility btn { @apply inline-flex items-center justify-center gap-2 rounded-[var(--radius-ctl)] px-4 py-2.5 text-sm font-semibold transition-colors disabled:cursor-not-allowed disabled:opacity-50; }
+@utility btn-primary { @apply btn bg-aqua text-white hover:bg-aqua-600 active:bg-aqua-700; }
+@utility btn-dark { @apply btn bg-depth text-white hover:bg-ink; }
+@utility btn-ghost { @apply btn text-depth hover:bg-mist; }
+@utility btn-outline { @apply btn border border-shoal bg-white text-depth hover:border-aqua hover:text-aqua-700; }
+@utility btn-danger { @apply btn bg-danger text-white hover:opacity-90; }
+@utility btn-sm { @apply px-3 py-1.5 text-[13px]; }
+@utility input { @apply w-full rounded-[var(--radius-ctl)] border border-shoal bg-white px-3 py-2.5 text-[15px] text-ink placeholder:text-ink-soft/60 transition-colors focus:border-aqua focus:outline-none focus:ring-3 focus:ring-aqua/15 disabled:bg-mist disabled:text-ink-soft; }
+@utility input-error { @apply border-danger focus:border-danger focus:ring-danger/15; }
+@utility label { @apply mb-1.5 block text-[13px] font-semibold text-ink; }
+@utility panel { @apply rounded-[var(--radius-panel)] border border-shoal bg-white; }
+@utility link { @apply font-semibold text-aqua-700 underline-offset-2 hover:underline; }
+@utility table-base {
+  @apply w-full text-left text-sm;
+  & th { @apply whitespace-nowrap border-b border-shoal bg-mist px-3 py-2.5 text-[12.5px] font-semibold text-ink-soft; }
+  & td { @apply border-b border-shoal/70 px-3 py-2.5 align-middle; }
+  & tbody tr:hover { @apply bg-mist/50; }
+}
+
+/* The one orchestrated moment: water rising into the hero headline. */
+.water-text {
+  --level: 100%;
+  background-image:
+    linear-gradient(to top, var(--color-aqua) 0 var(--level), var(--color-depth) var(--level) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: fill-up 1.8s cubic-bezier(.3,.7,.2,1) .2s both;
+}
+@property --level { syntax: '<percentage>'; inherits: false; initial-value: 0%; }
+@keyframes fill-up { from { --level: 0%; } to { --level: 46%; } }
+.ripple { animation: ripple 7s ease-in-out infinite; transform-origin: center; }
+@keyframes ripple { 0%,100% { transform: translateX(0) } 50% { transform: translateX(-36px) } }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: .001ms !important; animation-iteration-count: 1 !important; transition-duration: .001ms !important; }
+}

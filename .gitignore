@@ -1,0 +1,7 @@
+node_modules/
+dist/
+.expo/
+backend/data/*.sqlite*
+backend/backups/
+backend/src/uploads/*/
+.env
